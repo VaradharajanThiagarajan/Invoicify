@@ -743,6 +743,33 @@ public class InvoiceServiceTest {
 				)));
 	}
 
+	@Test
+	@Sql("/insert_invoices.sql")
+	public void deletePaidInvoicesById() throws Exception {
+		this.mockMvc.perform(delete("/invoice/delete/1"))
+				.andExpect(status().isOk())
+				.andExpect(content().string("Successfully deleted the invoice with id: 1"))
+				.andDo(print())
+				.andDo(document("Delete-Paid-Invoices-By-Id"));
+	}
+
+	@Test
+	@Sql("/insert_invoices.sql")
+	public void deletePaidInvoicesById_shouldNotDeleteUnpaidInvoice() throws Exception {
+		this.mockMvc.perform(delete("/invoice/delete/3"))
+				.andExpect(status().isOk())
+				.andExpect(content().string(
+						"Invoice has not yet been paid, unable to delete this invoice with id: 3"));
+	}
+
+	@Test
+	public void deletePaidInvoicesById_shouldReturnMessageOfNoInvoiceFound() throws Exception {
+		this.mockMvc.perform(delete("/invoice/delete/5"))
+				.andExpect(status().isOk())
+				.andExpect(content().string(
+						"There was no invoice found with the given id: 5"));
+	}
+
 	/**
 	 *
 	 * @throws Exception

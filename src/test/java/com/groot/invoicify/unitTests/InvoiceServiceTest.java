@@ -106,6 +106,44 @@ public class InvoiceServiceTest {
 		assertThat(result).isEqualTo(expectedResult);
 	}
 
+	@Test
+	public void deleteInvoiceByIdTest() {
+		Invoice invoice = new Invoice(1L, new Company("TCS"), "author", true, List.of(),
+				Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
+
+		when(invoiceRepository.findByInvoiceId(1L)).thenReturn(invoice);
+
+		invoiceService.deletePaidInvoice(1L);
+
+		verify(invoiceRepository).delete(invoice);
+
+	}
+
+	@Test
+	public void deleteInvoiceByIdTest_givenUnpaidInvoice_shouldNotDeleteInvoice() {
+		Invoice invoice = new Invoice(1L, new Company("TCS"), "author", false, List.of(),
+				Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
+
+		when(invoiceRepository.findByInvoiceId(1L)).thenReturn(invoice);
+
+		invoiceService.deletePaidInvoice(1L);
+
+		verify(invoiceRepository, times(0)).delete(invoice);
+
+	}
+
+	@Test
+	public void deleteInvoiceByIdTest_givenNoFoundInvoice_shouldNotDeleteAnything() {
+
+		when(invoiceRepository.findByInvoiceId(1L)).thenReturn(null);
+
+		invoiceService.deletePaidInvoice(1L);
+
+		verify(invoiceRepository, times(0)).delete(any());
+
+	}
+
+
 	/**
 	 *
 	 */

@@ -115,6 +115,22 @@ public class InvoiceService {
 		return deleteInvoices.stream().map(i1 -> new InvoiceDto(i1.getInvoiceId())).collect(Collectors.toList());
 	}
 
+	public String deletePaidInvoice(Long invoiceId) {
+
+		Invoice invoice = this.invoiceRepository.findByInvoiceId(invoiceId);
+
+		if (invoice != null) {
+			if (invoice.getPaid()) {
+				this.invoiceRepository.delete(invoice);
+				return "Successfully deleted the invoice with id: " + invoice.getInvoiceId();
+			} else {
+				return "Invoice has not yet been paid, unable to delete this invoice with id: " + invoice.getInvoiceId();
+			}
+		} else {
+			return "There was no invoice found with the given id: " + invoiceId;
+		}
+	}
+
 	/**
 	 *
 	 * @param pageNo
