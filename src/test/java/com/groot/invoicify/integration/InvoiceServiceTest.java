@@ -888,8 +888,8 @@ public class InvoiceServiceTest {
 
 		mockMvc.perform(get("/invoice")
 				.param("pageNo", "1")
-		).andExpect(status().isNotFound())
-				.andExpect(content().string("No invoice found for the given page."))
+		).andExpect(status().isOk())
+				.andExpect(jsonPath("length()").value(0))
 				.andDo(document("Get-All-Invoices-Invalid-Page"));
 	}
 }

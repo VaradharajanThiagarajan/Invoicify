@@ -194,10 +194,6 @@ public class InvoiceController {
 	 */
 	@GetMapping()
 	public ResponseEntity<?> getAllInvoices(@RequestParam(defaultValue = "0") Integer pageNo) {
-		List<InvoiceDto> invoiceDtoList = invoiceService.fetchAllInvoices(pageNo);
-		if (invoiceDtoList.isEmpty()) {
-			return new ResponseEntity<>("No invoice found for the given page.", HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>(invoiceDtoList, HttpStatus.OK);
+		return new ResponseEntity<>(invoiceService.fetchAllInvoices(pageNo), HttpStatus.OK);
 	}
 }
