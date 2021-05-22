@@ -5,9 +5,11 @@ import com.groot.invoicify.dto.DtoState;
 import com.groot.invoicify.dto.InvoiceDto;
 import com.groot.invoicify.dto.CompanyDto;
 import com.groot.invoicify.dto.ItemDto;
+
 import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * InvoiceServiceTest
- *
  */
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -46,7 +47,6 @@ public class InvoiceServiceTest {
 	ObjectMapper objectMapper;
 
 	/**
-	 *
 	 * @param companyName
 	 * @throws Exception
 	 */
@@ -61,7 +61,6 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @param invoiceDto
 	 * @return
 	 * @throws Exception
@@ -74,7 +73,6 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -117,7 +115,6 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -182,7 +179,6 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -210,8 +206,8 @@ public class InvoiceServiceTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.param("invoiceId", dbInvoice.getInvoiceNumber().toString())
 				.content(this.objectMapper.writeValueAsString(dbInvoice)))
-				.andExpect(MockMvcResultMatchers.status().isBadRequest())
-				.andExpect(jsonPath("$").value("The given Company or Invoice is not exist!"))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(content().string("The given Company or Invoice is not exist!"))
 				.andDo(document("Put-Invoice-Company-NotFound", requestFields(
 						fieldWithPath("invoiceNumber").description("Invoice number."),
 						fieldWithPath("companyName").description("Name of company on invoice."),
@@ -228,7 +224,6 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -250,8 +245,8 @@ public class InvoiceServiceTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.param("invoiceId", "123")
 				.content(this.objectMapper.writeValueAsString(invoiceDto)))
-				.andExpect(MockMvcResultMatchers.status().isBadRequest())
-				.andExpect(jsonPath("$").value("The given Company or Invoice is not exist!"))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(content().string("The given Company or Invoice is not exist!"))
 				.andDo(document("Put-Invoice-Invoice-NotFound", requestFields(
 						fieldWithPath("invoiceNumber").description("Invoice number."),
 						fieldWithPath("companyName").description("Name of company on invoice."),
@@ -268,7 +263,6 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -328,7 +322,6 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -385,7 +378,6 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -423,19 +415,18 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
 	public void fetchInvoiceByInvalidCompanyNameTest() throws Exception {
 		mockMvc.perform(get("/invoice/Rest")
-		).andExpect(status().isNotFound())
+		).andExpect(status().isOk())
+				.andExpect(content().string("No Company by that name."))
 				.andDo(print())
 				.andDo(document("Get-InvoiceBy-Invalid-Company-Name"));
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -445,16 +436,17 @@ public class InvoiceServiceTest {
 		mockMvc.perform(MockMvcRequestBuilders.post("/company")
 				.content(objectMapper.writeValueAsString(companyObject1))
 				.contentType(MediaType.APPLICATION_JSON)
-		).andExpect(status().isCreated());
+		).andExpect(status().isCreated())
+				.andDo(print());
 
 		mockMvc.perform(get("/invoice/Test")
-		).andExpect(status().isNotFound())
+		).andExpect(status().isOk())
+				.andExpect(content().string("Company Does not have Invoice."))
 				.andDo(print())
 				.andDo(document("Get-InvoiceBy-valid-Company-Name-With-No-Invoices"));
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -464,7 +456,8 @@ public class InvoiceServiceTest {
 		mockMvc.perform(MockMvcRequestBuilders.post("/company")
 				.content(objectMapper.writeValueAsString(companyObject1))
 				.contentType(MediaType.APPLICATION_JSON)
-		).andExpect(status().isCreated());
+		).andExpect(status().isCreated())
+				.andDo(print());
 
 		var itemsDto = Arrays.asList(
 				new ItemDto("itemdescription", 10, 14.50F, 60F),
@@ -491,11 +484,11 @@ public class InvoiceServiceTest {
 				.andExpect(jsonPath("[0].invoiceNumber").value(2L))
 				.andExpect(jsonPath("[1].invoiceNumber").value(1L))
 				.andExpect(jsonPath("[0].totalCost").value(1090F))
-				.andExpect(jsonPath("[1].totalCost").value(525F));
+				.andExpect(jsonPath("[1].totalCost").value(525F))
+				.andDo(print());
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -505,7 +498,8 @@ public class InvoiceServiceTest {
 		mockMvc.perform(post("/company")
 				.content(objectMapper.writeValueAsString(companyObject1))
 				.contentType(MediaType.APPLICATION_JSON)
-		).andExpect(status().isCreated());
+		).andExpect(status().isCreated())
+				.andDo(print());
 
 		var itemsDto = Arrays.asList(
 				new ItemDto("itemdescription", 10, 14.50F, 60F),
@@ -531,22 +525,22 @@ public class InvoiceServiceTest {
 		mockMvc.perform(get("/invoice/unpaid/Test")
 		).andExpect(status().isOk())
 				.andExpect(jsonPath("[0].invoiceNumber").value(invoiceId))
-				.andExpect(jsonPath("[0].totalCost").value(dbInvoice.getTotalCost()));
+				.andExpect(jsonPath("[0].totalCost").value(dbInvoice.getTotalCost()))
+				.andDo(print());
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
 	public void fetchUnPaidInvoiceByInValidCompanyName() throws Exception {
 		mockMvc.perform(get("/invoice/unpaid/Test")
-		).andExpect(status().isNotFound());
-
+		).andExpect(status().isOk())
+				.andExpect(content().string("No Company by that name."))
+				.andDo(print());
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -574,12 +568,12 @@ public class InvoiceServiceTest {
 		createInvoice(invoiceDto2);
 
 		mockMvc.perform(get("/invoice/unpaid/Test")
-		).andExpect(status().isNotFound())
+		).andExpect(status().isOk())
+				.andExpect(content().string("Company Does not have any Unpaid Invoice."))
 				.andDo(document("Get-Company-Unpaid-Invoice-ButWithAllInvoicesPaid"));
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -611,19 +605,18 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
 	public void fetchUnPaidInvoiceByInValidInvoiceNumberTest() throws Exception {
 		mockMvc.perform(get("/invoice/id/2")
-		).andExpect(status().isNotFound())
+		).andExpect(status().isOk())
+				.andExpect(content().string("Invoice id  2 does not exist."))
 				.andDo(print())
 				.andDo(document("Get-InvoiceBy-Invalid-InvoiceNumber"));
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -656,25 +649,27 @@ public class InvoiceServiceTest {
 
 		this.mockMvc.perform(get("/invoice/Test")
 				.param("pageNo", "0"))
+				.andExpect(status().isOk())
 				.andExpect(jsonPath("length()").value(10))
 				.andDo(print())
 				.andDo(document("Get-InvoiceBy-Company-Name-Paging"));
 
 		this.mockMvc.perform(get("/invoice/Test")
 				.param("pageNo", "2"))
+				.andExpect(status().isOk())
 				.andExpect(jsonPath("length()").value(5))
 				.andDo(print())
 				.andDo(document("Get-InvoiceBy-Company-Name-Paging-Last"));
 
 		this.mockMvc.perform(get("/invoice/Test")
 				.param("pageNo", "3"))
-				.andExpect(status().isNotFound())
+				.andExpect(status().isOk())
+				.andExpect(content().string("Company has invoice but page number is invalid."))
 				.andDo(print())
 				.andDo(document("Get-InvoiceBy-Company-Name-Paging-Invalid"));
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -704,8 +699,8 @@ public class InvoiceServiceTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.param("invoiceId", dbInvoice.getInvoiceNumber().toString())
 				.content(this.objectMapper.writeValueAsString(dbInvoice)))
-				.andExpect(MockMvcResultMatchers.status().isBadRequest())
-				.andExpect(jsonPath("$").value("The invoice can't update since it was already paid status!"))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(content().string("The invoice can't update since it was already paid status!"))
 				.andDo(document("Put-Invoice-Already-Paid", requestFields(
 						fieldWithPath("invoiceNumber").description("Invoice number."),
 						fieldWithPath("companyName").description("Name of company on invoice."),
@@ -722,7 +717,6 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -744,7 +738,6 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -786,24 +779,26 @@ public class InvoiceServiceTest {
 		this.mockMvc.perform(get("/invoice/unpaid/Test")
 				.param("pageNo", "0"))
 				.andExpect(jsonPath("length()").value(10))
+				.andExpect(status().isOk())
 				.andDo(print())
 				.andDo(document("Get-Unpaid-InvoiceBy-Company-Name-Paging"));
 
 		this.mockMvc.perform(get("/invoice/unpaid/Test")
 				.param("pageNo", "1"))
 				.andExpect(jsonPath("length()").value(3))
+				.andExpect(status().isOk())
 				.andDo(print())
 				.andDo(document("Get-Unpaid-InvoiceBy-Company-Name-Paging-Last"));
 
 		this.mockMvc.perform(get("/invoice/unpaid/Test")
 				.param("pageNo", "2"))
-				.andExpect(status().isNotFound())
+				.andExpect(status().isOk())
+				.andExpect(content().string("Company has Unpaid invoice but page number is invalid."))
 				.andDo(print())
 				.andDo(document("Get-Unpaid-InvoiceBy-Company-Name-Paging-Invalid"));
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -838,7 +833,6 @@ public class InvoiceServiceTest {
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test

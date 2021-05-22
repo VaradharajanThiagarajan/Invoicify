@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -80,7 +81,7 @@ public class ItemServiceTest {
 		var itemDto = new ItemDto("description", 1, 1.1f, 1.1f);
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/item")
 				.contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(status().isOk())
 				.andExpect(jsonPath("$").isEmpty());
 
 		createItem(itemDto).andExpect(MockMvcResultMatchers.status().isCreated());
@@ -242,8 +243,9 @@ public class ItemServiceTest {
 		mockMvc.perform(post("/invoice/additem/0")
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(this.objectMapper.writeValueAsString(itemsDtoAdditional)))
-				.andExpect(status().isNotFound())
-				.andExpect(content().string("Invoice id  0 does not exist."))
+				.andExpect(status().isOk())
+				.andExpect(content().string("Invoice id 0 does not exist."))
+				.andDo(print())
 				.andDo(document("add-Items-to-invalid-Invoice", requestFields(
 						fieldWithPath("[].itemId").description("Item id"),
 						fieldWithPath("[].description").description("Item description"),
@@ -278,8 +280,9 @@ public class ItemServiceTest {
 		mockMvc.perform(post("/invoice/additem/1")
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(this.objectMapper.writeValueAsString(itemsDtoAdditional)))
-				.andExpect(status().isBadRequest())
-				.andExpect(jsonPath("$").value("The invoice can't update since it was already paid status!"))
+				.andExpect(status().isOk())
+				.andExpect(content().string("The invoice can't update since it was already paid status!"))
+				.andDo(print())
 				.andDo(document("add-Items-to-paid-Invoice", requestFields(
 						fieldWithPath("[].itemId").description("Item id"),
 						fieldWithPath("[].description").description("Item description"),
