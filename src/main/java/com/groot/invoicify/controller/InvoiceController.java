@@ -63,11 +63,11 @@ public class InvoiceController {
 	public ResponseEntity<?> updateInvoice(@RequestParam Long invoiceId, @RequestBody InvoiceDto invoiceDto) {
 		var isPaid = this.invoiceService.isInvoicePaid(invoiceId);
 		if (isPaid) {
-			return new ResponseEntity<>("The invoice can't update since it was already paid status!", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("The invoice can't update since it was already paid status!", HttpStatus.OK);
 		}
 		var invoice = this.invoiceService.updatedInvoice(invoiceId, invoiceDto);
 		if (invoice == null) {
-			return new ResponseEntity<>("The given Company or Invoice is not exist!", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("The given Company or Invoice is not exist!", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(invoice, HttpStatus.OK);
 		}
@@ -81,21 +81,18 @@ public class InvoiceController {
 	 */
 	@GetMapping("{companyName}")
 	public ResponseEntity<?> getAllInvoicesByCompany(@PathVariable String companyName, @RequestParam(defaultValue = "0") Integer pageNo) {
-		CompanyDto companyDto = this.companyService.findSingleCompany(companyName);
-		if (companyDto == null) {
-			return new ResponseEntity<>("No Company by that name.", HttpStatus.NOT_FOUND);
+		if (this.companyService.findSingleCompany(companyName) == null) {
+			return new ResponseEntity<String>("No Company by that name.", HttpStatus.OK);
 		} else {
 			String returnFromPaging = invoiceService.invoicePagingTest(pageNo, companyName);
 			if (returnFromPaging != null) {
 				if (returnFromPaging.equals("Company has invoice but page number is invalid.")) {
-					return new ResponseEntity<>("Company has invoice but page number is invalid.", HttpStatus.NOT_FOUND);
+					return new ResponseEntity<String>("Company has invoice but page number is invalid.", HttpStatus.OK);
 				} else {
-					return new ResponseEntity<>("Company Does not have Invoice.", HttpStatus.NOT_FOUND);
+					return new ResponseEntity<String>("Company Does not have Invoice.", HttpStatus.OK);
 				}
-
 			}
-			List<InvoiceDto> invoiceDtoList = invoiceService.fetchAllInvoicesByCompany(pageNo, companyName);
-			return new ResponseEntity<>(invoiceDtoList, HttpStatus.OK);
+			return new ResponseEntity<List<InvoiceDto>>(invoiceService.fetchAllInvoicesByCompany(pageNo, companyName), HttpStatus.OK);
 
 		}
 	}
@@ -111,15 +108,15 @@ public class InvoiceController {
 
 		CompanyDto companyDto = this.companyService.findSingleCompany(companyName);
 		if (companyDto == null) {
-			return new ResponseEntity<>("No Company by that name.", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("No Company by that name.", HttpStatus.OK);
 		} else {
 
 			String returnFromPaging = invoiceService.invoicePagingUnPaidTest(pageNo, companyName);
 			if (returnFromPaging != null) {
 				if (returnFromPaging.equals("Company has Unpaid invoice but page number is invalid.")) {
-					return new ResponseEntity<>("Company has Unpaid invoice but page number is invalid.", HttpStatus.NOT_FOUND);
+					return new ResponseEntity<>("Company has Unpaid invoice but page number is invalid.", HttpStatus.OK);
 				} else {
-					return new ResponseEntity<>("Company Does not have any Unpaid Invoice.", HttpStatus.NOT_FOUND);
+					return new ResponseEntity<>("Company Does not have any Unpaid Invoice.", HttpStatus.OK);
 				}
 
 			}
@@ -140,7 +137,7 @@ public class InvoiceController {
 
 		InvoiceDto invoiceDto = this.invoiceService.findInvoiceByInvoiceNumber(invoiceNum);
 		if (invoiceDto == null) {
-			return new ResponseEntity<>("Invoice id  " + invoiceNum + " does not exist.", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Invoice id  " + invoiceNum + " does not exist.", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(invoiceDto, HttpStatus.OK);
 		}
@@ -156,12 +153,12 @@ public class InvoiceController {
 	public ResponseEntity<?> addItemsToExistingInvoice(@PathVariable Long invoiceNum, @RequestBody List<ItemDto> itemsDtoList) {
 		var isPaid = this.invoiceService.isInvoicePaid(invoiceNum);
 		if (isPaid) {
-			return new ResponseEntity<>("The invoice can't update since it was already paid status!", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("The invoice can't update since it was already paid status!", HttpStatus.OK);
 		}
 		Invoice invoiceEntity = this.invoiceService.findInvoiceEntityByInvoiceNumber(invoiceNum);
 
 		if (invoiceEntity == null) {
-			return new ResponseEntity<>("Invoice id  " + invoiceNum + " does not exist.", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Invoice id " + invoiceNum + " does not exist.", HttpStatus.OK);
 		} else {
 			itemService.addItemsToGivenInvoiceNumber(invoiceEntity, itemsDtoList);
 			invoiceService.updateInvoiceModifiedDate(invoiceEntity);

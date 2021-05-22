@@ -109,7 +109,8 @@ public class CompanyControllerIT {
 		mockMvc.perform(post("/company")
 				.content(objectMapper.writeValueAsString(companyObject2))
 				.contentType(MediaType.APPLICATION_JSON)
-		).andExpect(status().isBadRequest())
+		).andExpect(status().isOk())
+				.andExpect(content().string("Duplicate Company Name."))
 				.andDo(print())
 				.andDo(document("Post-Company-DuplicateRequest"));
 
@@ -177,10 +178,10 @@ public class CompanyControllerIT {
 	@Test
 	void getSingleCompanyByName_noContentTest() throws Exception {
 		mockMvc.perform(get("/company/Google")
-		).andExpect(status().isNotFound())
+		).andExpect(status().isOk())
 				.andDo(print())
 				.andDo(document("Get-Company-ByName-NoContent"))
-				.andExpect(content().string("No Company by that name."));
+				.andExpect(content().string(""));
 	}
 
 	/**
@@ -222,7 +223,7 @@ public class CompanyControllerIT {
 		mockMvc.perform(patch("/company/1")
 				.content(objectMapper.writeValueAsString(companyObject2))
 				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isBadRequest())
+				.andExpect(status().isOk())
 				.andExpect(content().string("No Company by given Id."));
 	}
 }
