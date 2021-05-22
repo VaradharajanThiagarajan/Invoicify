@@ -178,6 +178,15 @@ public class InvoiceController {
 		return new ResponseEntity<List<InvoiceDto>>(this.invoiceService.deletePaidAndOlderInvoices().stream().map(i1 -> new InvoiceDto(i1.getInvoiceNumber())).collect(Collectors.toList()), HttpStatus.OK);
 	}
 
+	@DeleteMapping("delete/{invoiceNum}")
+	public ResponseEntity<String> deletePaidInvoiceById(@PathVariable Long invoiceNum) {
+		if (invoiceNum != null) {
+			return new ResponseEntity<>(this.invoiceService.deletePaidInvoice(invoiceNum), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Invoice Id received was null.",HttpStatus.BAD_REQUEST);
+		}
+	}
+
 	/**
 	 *
 	 * @param pageNo

@@ -179,6 +179,14 @@ include::{snippets}/Delete-Paid-Older-Invoices/http-request.adoc[]
 .response
 include::{snippets}/Delete-Paid-Older-Invoices/http-response.adoc[]
 
+Delete Paid Invoices By Id
+
+.request
+include::{snippets}/Delete-Paid-Invoices-By-Id/http-request.adoc[]
+
+.response
+include::{snippets}/Delete-Paid-Invoices-By-Id/http-response.adoc[]
+
 
 Get Invoice By Company Name Paging First Page Endpoint
 
