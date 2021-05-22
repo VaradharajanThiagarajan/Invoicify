@@ -1,0 +1,957 @@
+{
+	"info": {
+		"_postman_id": "412be7ef-55e9-42fa-b795-b646df74d69f",
+		"name": "Invoicify-Heroku",
+		"description": "Invoicify for Heroku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Compnay (POST)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Infosys\",\"address\":\"Address1\",\"city\":\"city1\",\"state\":\"state1\",\"zip\":\"91367\",\"contactName\":\"Mike\",\"contactTitle\":\"CEO\",\"contactPhoneNumber\":\"800-800-800\"}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/company",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compnay (GET)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://invoicifygroot.herokuapp.com/company",
+							"protocol": "http",
+							"host": [
+								"invoicifygroot",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compnay (PATCH)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Cognizant2\"}"
+						},
+						"url": {
+							"raw": "http://invoicifygroot.herokuapp.com/company/1",
+							"protocol": "http",
+							"host": [
+								"invoicifygroot",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"company",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compnay (GET) Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://invoicifygroot.herokuapp.com/company",
+							"protocol": "http",
+							"host": [
+								"invoicifygroot",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"company"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "Invoice",
+					"item": [
+						{
+							"name": "Invoice (POST)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"companyName\":\"Cognizant2\",\"author\":\"test\",\"paid\":false,\"items\":[{\"description\":\"Description\",\"rateHourBilled\":10,\"ratePrice\":14.5,\"flatPrice\":20.5,\"state\":\"New\"}]}"
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ALL INVOICES",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ALL INVOICES PAGINATION",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://invoicifygroot.herokuapp.com/invoice?pageNo=0",
+									"protocol": "https",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice"
+									],
+									"query": [
+										{
+											"key": "pageNo",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET invoice by invoice num",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/id/1",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Unpaidinvoice by company name",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/unpaid/Cognizant2",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"unpaid",
+										"Cognizant2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Unpaidinvoice by company name PAGINATION",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/unpaid/Cognizant2?pageNo=0",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"unpaid",
+										"Cognizant2"
+									],
+									"query": [
+										{
+											"key": "pageNo",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invoice Add Line Item",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"companyName\":\"Cognizant\",\"author\":\"test\",\"paid\":false,\"items\":[{\"description\":\"Description\",\"rateHourBilled\":10,\"ratePrice\":14.5,\r\n\t\"flatPrice\":20.5,\"state\":\"New\"}]}"
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ALL INVOICES Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ALL INVOICES PAGINATION Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://invoicifygroot.herokuapp.com/invoice?pageNo=0",
+									"protocol": "https",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice"
+									],
+									"query": [
+										{
+											"key": "pageNo",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET invoice by invoice num Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/id/1",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Unpaidinvoice by company name Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/unpaid/Cognizant2",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"unpaid",
+										"Cognizant2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Unpaidinvoice by company name PAGINATION Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/unpaid/Cognizant2?pageNo=0",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"unpaid",
+										"Cognizant2"
+									],
+									"query": [
+										{
+											"key": "pageNo",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invoice (PUT) with New Line Items",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"companyName\":\"Cognizant\",\"author\":\"test\",\"paid\":false,\"items\":[\r\n\t{\"itemId\":1,\"description\":\"Description 123\",\"rateHourBilled\":10,\"ratePrice\":14.5,\"flatPrice\":60.0,\"state\":\"Modified\"},\r\n\t{\"description\":\"Second item\",\"rateHourBilled\":12,\"ratePrice\":14.5,\"flatPrice\":70.0,\"state\":\"New\"}]}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/invoice?invoiceId=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"invoice"
+									],
+									"query": [
+										{
+											"key": "invoiceId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ALL INVOICES Copy 2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ALL INVOICES PAGINATION Copy 2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://invoicifygroot.herokuapp.com/invoice?pageNo=0",
+									"protocol": "https",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice"
+									],
+									"query": [
+										{
+											"key": "pageNo",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET invoice by invoice num Copy 2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/id/1",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Unpaidinvoice by company name Copy 2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/unpaid/Cognizant2",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"unpaid",
+										"Cognizant2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Unpaidinvoice by company name PAGINATION Copy 2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/unpaid/Cognizant2?pageNo=0",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"unpaid",
+										"Cognizant2"
+									],
+									"query": [
+										{
+											"key": "pageNo",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE OLDER AND PAID INVOICES",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/deletepaidandolderinvoices",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"deletepaidandolderinvoices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ALL INVOICES Copy 3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ALL INVOICES PAGINATION Copy 3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://invoicifygroot.herokuapp.com/invoice?pageNo=0",
+									"protocol": "https",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice"
+									],
+									"query": [
+										{
+											"key": "pageNo",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET invoice by invoice num Copy 3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/id/1",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Unpaidinvoice by company name Copy 3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/unpaid/Cognizant2",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"unpaid",
+										"Cognizant2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Unpaidinvoice by company name PAGINATION Copy 3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://invoicifygroot.herokuapp.com/invoice/unpaid/Cognizant2?pageNo=0",
+									"protocol": "http",
+									"host": [
+										"invoicifygroot",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"invoice",
+										"unpaid",
+										"Cognizant2"
+									],
+									"query": [
+										{
+											"key": "pageNo",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
