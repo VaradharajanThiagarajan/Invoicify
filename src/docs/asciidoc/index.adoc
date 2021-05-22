@@ -1,27 +1,3 @@
-Get Company By Name Response
-
-.request
-include::{snippets}/Get-Company-ByName/http-request.adoc[]
-
-.response
-include::{snippets}/Get-Company-ByName/http-response.adoc[]
-
-Get Company By Name No Content Response
-
-.request
-include::{snippets}/Get-Company-ByName-NoContent/http-request.adoc[]
-
-.response
-include::{snippets}/Get-Company-ByName-NoContent/http-response.adoc[]
-
-Get Company All Response
-
-.request
-include::{snippets}/Get-Company-All/http-request.adoc[]
-
-.response
-include::{snippets}/Get-Company-All/http-response.adoc[]
-
 Post Company Success Response
 
 .request
@@ -38,6 +14,16 @@ include::{snippets}/Post-Company-DuplicateRequest/http-request.adoc[]
 .response
 include::{snippets}/Post-Company-DuplicateRequest/http-response.adoc[]
 
+
+Get Company All Response
+
+.request
+include::{snippets}/Get-Company-All/http-request.adoc[]
+
+.response
+include::{snippets}/Get-Company-All/http-response.adoc[]
+
+
 Patch Company Response
 
 .request
@@ -45,38 +31,6 @@ include::{snippets}/Patch-Company/http-request.adoc[]
 
 .response
 include::{snippets}/Patch-Company/http-response.adoc[]
-
-Post Item Endpoint
-
-.request
-include::{snippets}/Post-Item/http-request.adoc[]
-
-.response
-include::{snippets}/Post-Item/http-response.adoc[]
-
-Get Item Endpoint
-
-.request
-include::{snippets}/Get-Item/http-request.adoc[]
-
-.response
-include::{snippets}/Get-Item/http-response.adoc[]
-
-Patch Item Endpoint
-
-.request
-include::{snippets}/Patch-Item/http-request.adoc[]
-
-.response
-include::{snippets}/Patch-Item/http-response.adoc[]
-
-Put Item Endpoint
-
-.request
-include::{snippets}/Put-Item/http-request.adoc[]
-
-.response
-include::{snippets}/Put-Item/http-response.adoc[]
 
 Post Invoice Endpoint
 
@@ -86,29 +40,22 @@ include::{snippets}/Post-Invoice/http-request.adoc[]
 .response
 include::{snippets}/Post-Invoice/http-response.adoc[]
 
-Get Invoice By Company Name Endpoint
+Get All Invoices with Paging (Valid Page Number)
 
 .request
-include::{snippets}/Get-InvoiceBy-Company-Name/http-request.adoc[]
+include::{snippets}/Get-All-Invoices/http-request.adoc[]
 
 .response
-include::{snippets}/Get-InvoiceBy-Company-Name/http-response.adoc[]
+include::{snippets}/Get-All-Invoices/http-response.adoc[]
 
-Get Invoice By Invalid Company Name Endpoint
+Get All Invoices with Paging (InValid Page Number)
 
 .request
-include::{snippets}/Get-InvoiceBy-Invalid-Company-Name/http-request.adoc[]
+include::{snippets}/Get-All-Invoices-Invalid-Page/http-request.adoc[]
 
 .response
-include::{snippets}/Get-InvoiceBy-Invalid-Company-Name/http-response.adoc[]
+include::{snippets}/Get-All-Invoices-Invalid-Page/http-response.adoc[]
 
-Get Invoice By valid Company Name but with No Invoices Endpoint
-
-.request
-include::{snippets}/Get-InvoiceBy-valid-Company-Name-With-No-Invoices/http-request.adoc[]
-
-.response
-include::{snippets}/Get-InvoiceBy-valid-Company-Name-With-No-Invoices/http-response.adoc[]
 
 Get Invoice By Valid Invoice Number Endpoint
 
@@ -127,6 +74,66 @@ include::{snippets}/Get-InvoiceBy-Invalid-InvoiceNumber/http-request.adoc[]
 include::{snippets}/Get-InvoiceBy-Invalid-InvoiceNumber/http-response.adoc[]
 
 
+Get Unpaid Invoice By Company Name Paging First Page Endpoint
+
+.request
+include::{snippets}/Get-Unpaid-InvoiceBy-Company-Name-Paging/http-request.adoc[]
+
+.response
+include::{snippets}/Get-Unpaid-InvoiceBy-Company-Name-Paging/http-response.adoc[]
+
+Get Unpaid Invoice By Company Name Paging Last Page Endpoint
+
+.request
+include::{snippets}/Get-Unpaid-InvoiceBy-Company-Name-Paging-Last/http-request.adoc[]
+
+.response
+include::{snippets}/Get-Unpaid-InvoiceBy-Company-Name-Paging-Last/http-response.adoc[]
+
+Get Unpaid Invoice By Company Name Paging Invalid Page Endpoint
+
+.request
+include::{snippets}/Get-Unpaid-InvoiceBy-Company-Name-Paging-Invalid/http-request.adoc[]
+
+.response
+include::{snippets}/Get-Unpaid-InvoiceBy-Company-Name-Paging-Invalid/http-response.adoc[]
+
+Get Unpaid Invoice by Company but with Company has all the invoices Paid
+
+.request
+include::{snippets}/Get-Company-Unpaid-Invoice-ButWithAllInvoicesPaid/http-request.adoc[]
+
+.response
+include::{snippets}/Get-Company-Unpaid-Invoice-ButWithAllInvoicesPaid/http-response.adoc[]
+
+
+Add Items to Existing Valid Invoice ( invoice number passed as parameter)
+
+.request
+include::{snippets}/add-Items-to-Existing-Invoice/http-request.adoc[]
+
+.response
+include::{snippets}/add-Items-to-Existing-Invoice/http-response.adoc[]
+
+Add Items to InValid Invoice ( invoice number passed as parameter)
+
+.request
+include::{snippets}/add-Items-to-invalid-Invoice/http-request.adoc[]
+
+.response
+include::{snippets}/add-Items-to-invalid-Invoice/http-response.adoc[]
+
+
+Add Items to paid Invoice ( invoice number passed as parameter)
+
+.request
+include::{snippets}/add-Items-to-paid-Invoice/http-request.adoc[]
+
+.response
+include::{snippets}/add-Items-to-paid-Invoice/http-response.adoc[]
+
+
+
 Put Invoice Endpoint
 
 .request
@@ -134,6 +141,15 @@ include::{snippets}/Put-Invoice/http-request.adoc[]
 
 .response
 include::{snippets}/Put-Invoice/http-response.adoc[]
+
+Put Invoice Already Paid
+
+.request
+include::{snippets}/Put-Invoice-Already-Paid/http-request.adoc[]
+
+.response
+include::{snippets}/Put-Invoice-Already-Paid/http-response.adoc[]
+
 
 
 Put Invoice Company NotFound Endpoint
@@ -169,7 +185,6 @@ include::{snippets}/Put-Invoice-Delete-LineItem/http-request.adoc[]
 
 .response
 include::{snippets}/Put-Invoice-Delete-LineItem/http-response.adoc[]
-
 
 Delete Paid And Year Old Invoices
 
@@ -212,87 +227,79 @@ include::{snippets}/Get-InvoiceBy-Company-Name-Paging-Invalid/http-request.adoc[
 .response
 include::{snippets}/Get-InvoiceBy-Company-Name-Paging-Invalid/http-response.adoc[]
 
-Get Unpaid Invoice By Company Name Paging First Page Endpoint
+
+Get Company By Name Response
 
 .request
-include::{snippets}/Get-Unpaid-InvoiceBy-Company-Name-Paging/http-request.adoc[]
+include::{snippets}/Get-Company-ByName/http-request.adoc[]
 
 .response
-include::{snippets}/Get-Unpaid-InvoiceBy-Company-Name-Paging/http-response.adoc[]
+include::{snippets}/Get-Company-ByName/http-response.adoc[]
 
-Get Unpaid Invoice By Company Name Paging Last Page Endpoint
+Get Company By Name No Content Response
 
 .request
-include::{snippets}/Get-Unpaid-InvoiceBy-Company-Name-Paging-Last/http-request.adoc[]
+include::{snippets}/Get-Company-ByName-NoContent/http-request.adoc[]
 
 .response
-include::{snippets}/Get-Unpaid-InvoiceBy-Company-Name-Paging-Last/http-response.adoc[]
+include::{snippets}/Get-Company-ByName-NoContent/http-response.adoc[]
 
-Get Unpaid Invoice By Company Name Paging Invalid Page Endpoint
+
+Post Item Endpoint
 
 .request
-include::{snippets}/Get-Unpaid-InvoiceBy-Company-Name-Paging-Invalid/http-request.adoc[]
+include::{snippets}/Post-Item/http-request.adoc[]
 
 .response
-include::{snippets}/Get-Unpaid-InvoiceBy-Company-Name-Paging-Invalid/http-response.adoc[]
+include::{snippets}/Post-Item/http-response.adoc[]
 
-Put Invoice Already Paid
+Get Item Endpoint
 
 .request
-include::{snippets}/Put-Invoice-Already-Paid/http-request.adoc[]
+include::{snippets}/Get-Item/http-request.adoc[]
 
 .response
-include::{snippets}/Put-Invoice-Already-Paid/http-response.adoc[]
+include::{snippets}/Get-Item/http-response.adoc[]
 
-Get Unpaid Invoice by Company but with Company has all the invoices Paid
+Patch Item Endpoint
 
 .request
-include::{snippets}/Get-Company-Unpaid-Invoice-ButWithAllInvoicesPaid/http-request.adoc[]
+include::{snippets}/Patch-Item/http-request.adoc[]
 
 .response
-include::{snippets}/Get-Company-Unpaid-Invoice-ButWithAllInvoicesPaid/http-response.adoc[]
+include::{snippets}/Patch-Item/http-response.adoc[]
 
-Add Items to Existing Valid Invoice ( invoice number passed as parameter)
+Put Item Endpoint
 
 .request
-include::{snippets}/add-Items-to-Existing-Invoice/http-request.adoc[]
+include::{snippets}/Put-Item/http-request.adoc[]
 
 .response
-include::{snippets}/add-Items-to-Existing-Invoice/http-response.adoc[]
+include::{snippets}/Put-Item/http-response.adoc[]
 
-Add Items to InValid Invoice ( invoice number passed as parameter)
+Get Invoice By Company Name Endpoint
 
 .request
-include::{snippets}/add-Items-to-invalid-Invoice/http-request.adoc[]
+include::{snippets}/Get-InvoiceBy-Company-Name/http-request.adoc[]
 
 .response
-include::{snippets}/add-Items-to-invalid-Invoice/http-response.adoc[]
+include::{snippets}/Get-InvoiceBy-Company-Name/http-response.adoc[]
 
-
-Add Items to paid Invoice ( invoice number passed as parameter)
+Get Invoice By Invalid Company Name Endpoint
 
 .request
-include::{snippets}/add-Items-to-paid-Invoice/http-request.adoc[]
+include::{snippets}/Get-InvoiceBy-Invalid-Company-Name/http-request.adoc[]
 
 .response
-include::{snippets}/add-Items-to-paid-Invoice/http-response.adoc[]
+include::{snippets}/Get-InvoiceBy-Invalid-Company-Name/http-response.adoc[]
 
-
-Get All Invoices with Paging (Valid Page Number)
+Get Invoice By valid Company Name but with No Invoices Endpoint
 
 .request
-include::{snippets}/Get-All-Invoices/http-request.adoc[]
+include::{snippets}/Get-InvoiceBy-valid-Company-Name-With-No-Invoices/http-request.adoc[]
 
 .response
-include::{snippets}/Get-All-Invoices/http-response.adoc[]
-
-Get All Invoices with Paging (InValid Page Number)
-
-.request
-include::{snippets}/Get-All-Invoices-Invalid-Page/http-request.adoc[]
-
-.response
-include::{snippets}/Get-All-Invoices-Invalid-Page/http-response.adoc[]
+include::{snippets}/Get-InvoiceBy-valid-Company-Name-With-No-Invoices/http-response.adoc[]
 
 
 
