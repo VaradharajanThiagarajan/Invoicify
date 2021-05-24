@@ -63,7 +63,7 @@ public class ItemServiceTest {
 		createItem(itemDto).andExpect(MockMvcResultMatchers.status().isCreated())
 				.andExpect(jsonPath("$").isNumber())
 				.andDo(MockMvcRestDocumentation.document("Post-Item", requestFields(
-						fieldWithPath("itemId").description("Item id"),
+						fieldWithPath("itemId").type(Long.class).description("Item id"),
 						fieldWithPath("description").description("Item description"),
 						fieldWithPath("rateHourBilled").description("Item quantity"),
 						fieldWithPath("ratePrice").description("Item rate price"),
