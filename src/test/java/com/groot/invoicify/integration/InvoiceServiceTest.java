@@ -93,7 +93,7 @@ public class InvoiceServiceTest {
 				.andExpect(jsonPath("$.items[0].rateHourBilled").value(10))
 				.andExpect(jsonPath("$.items[0].flatPrice").value(20.50F))
 				.andDo(document("Post-Invoice", requestFields(
-						fieldWithPath("invoiceNumber").type(Long.class).description("Name of company on invoice."),
+						fieldWithPath("invoiceNumber").type(Long.class).description("Number of the invoice."),
 						fieldWithPath("companyName").description("Name of company on invoice."),
 						fieldWithPath("totalCost").description("Total cost of invoice."),
 						fieldWithPath("author").description("Author of invoice."),
